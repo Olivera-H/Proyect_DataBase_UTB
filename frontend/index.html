@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semilleros UTB · Iniciar sesión</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:wght@500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          institucional: {
+            50:  '#F5F8FB',
+            100: '#E7EEF5',
+            300: '#9DB9D4',
+            500: '#2F5C8F',
+            600: '#254A73',
+            700: '#1E3A5F',
+            900: '#12233A',
+            950: '#0B1622'
+          },
+          dorado: {
+            300: '#E7C878',
+            400: '#D9A441',
+            500: '#C9962B',
+            600: '#A97A1E'
+          }
+        },
+        fontFamily: {
+          display: ['Spectral', 'Georgia', 'serif'],
+          sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+        }
+      }
+    }
+  };
+</script>
+<link rel="stylesheet" href="assets/css/custom.css">
+<!-- theme.js se carga en el head para fijar el modo oscuro/claro antes de pintar la página -->
+<script src="assets/js/theme.js"></script>
+</head>
+<body class="min-h-screen bg-institucional-50 text-institucional-950 dark:bg-institucional-950 dark:text-institucional-50">
+
+  <button id="boton-tema" type="button"
+    class="fixed top-4 right-4 z-10 flex items-center gap-2 rounded-full border border-institucional-200 dark:border-institucional-700 bg-white/80 dark:bg-institucional-900/80 backdrop-blur px-3 py-2 text-sm shadow-sm hover:border-dorado-500 dark:hover:border-dorado-400">
+    <span data-icono-tema>🌙</span>
+    <span data-texto-tema class="hidden sm:inline">Modo oscuro</span>
+  </button>
+
+  <main class="min-h-screen grid lg:grid-cols-2">
+    <!-- Panel institucional -->
+    <section class="hidden lg:flex flex-col justify-between bg-institucional-700 dark:bg-institucional-900 text-institucional-50 px-12 py-14">
+      <div>
+        <p class="font-display text-2xl tracking-tight">Semilleros UTB</p>
+        <p class="mt-1 text-institucional-200 text-sm">Universidad Tecnológica de Bolívar</p>
+      </div>
+      <div class="max-w-md">
+        <h1 class="font-display text-4xl leading-tight">
+          Un solo lugar para el trayecto investigativo de cada semillero.
+        </h1>
+        <p class="mt-5 text-institucional-200 leading-relaxed">
+          Integrantes, proyectos, actividades y productos académicos, organizados
+          por semillero y con el seguimiento que antes vivía disperso en archivos
+          sueltos.
+        </p>
+      </div>
+      <p class="text-xs text-institucional-300">
+        Acceso restringido a administradores del sistema y docentes líderes de semillero.
+      </p>
+    </section>
+
+    <!-- Formulario de acceso -->
+    <section class="flex items-center justify-center px-6 py-16">
+      <div class="w-full max-w-sm">
+        <div class="lg:hidden mb-8">
+          <p class="font-display text-xl">Semilleros UTB</p>
+          <p class="text-sm text-institucional-500 dark:text-institucional-300">Universidad Tecnológica de Bolívar</p>
+        </div>
+
+        <h2 class="font-display text-2xl mb-1">Iniciar sesión</h2>
+        <p class="text-sm text-institucional-500 dark:text-institucional-300 mb-8">
+          Ingresa con tu correo institucional.
+        </p>
+
+        <form id="form-login" class="space-y-5" novalidate>
+          <div>
+            <label for="email" class="block text-sm font-medium mb-1.5">Correo institucional</label>
+            <input id="email" name="email" type="email" required autocomplete="email"
+              placeholder="nombre.apellido@utb.edu.co"
+              class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3.5 py-2.5 text-sm placeholder:text-institucional-300 dark:placeholder:text-institucional-500 focus:border-institucional-500 dark:focus:border-dorado-400">
+          </div>
+          <div>
+            <label for="password" class="block text-sm font-medium mb-1.5">Contraseña</label>
+            <input id="password" name="password" type="password" required autocomplete="current-password"
+              class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3.5 py-2.5 text-sm focus:border-institucional-500 dark:focus:border-dorado-400">
+          </div>
+
+          <p id="aviso-login" class="hidden text-sm"></p>
+
+          <button id="boton-ingresar" type="submit"
+            class="w-full rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium py-2.5 text-sm hover:bg-institucional-600 dark:hover:bg-dorado-400 disabled:opacity-60">
+            Ingresar
+          </button>
+        </form>
+
+        <p class="mt-8 text-xs text-institucional-400 dark:text-institucional-500">
+          Datos de prueba (script SQL de ejemplo): admin.sistema@utb.edu.co /
+          carlos.martinez@utb.edu.co · contraseña <span class="font-medium">Utb2026*</span>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/login.js"></script>
+</body>
+</html>

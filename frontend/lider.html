@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semilleros UTB · Panel del Docente Líder</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:wght@500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          institucional: { 50:'#F5F8FB',100:'#E7EEF5',300:'#9DB9D4',500:'#2F5C8F',600:'#254A73',700:'#1E3A5F',800:'#17304F',900:'#12233A',950:'#0B1622' },
+          dorado: { 300:'#E7C878',400:'#D9A441',500:'#C9962B',600:'#A97A1E' }
+        },
+        fontFamily: {
+          display: ['Spectral', 'Georgia', 'serif'],
+          sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+        }
+      }
+    }
+  };
+</script>
+<link rel="stylesheet" href="assets/css/custom.css">
+<script src="assets/js/theme.js"></script>
+</head>
+<body class="min-h-screen bg-institucional-50 text-institucional-950 dark:bg-institucional-950 dark:text-institucional-50">
+
+<div class="flex min-h-screen">
+  <aside class="hidden md:flex md:w-60 flex-col bg-institucional-700 dark:bg-institucional-900 text-institucional-50 px-5 py-6 shrink-0">
+    <div class="mb-10">
+      <p class="font-display text-xl">Semilleros UTB</p>
+      <p id="titulo-semillero" class="text-xs text-institucional-300 mt-0.5">Panel del Docente Líder</p>
+    </div>
+    <nav class="space-y-1.5 text-sm">
+      <button data-pestana="resumen" class="w-full text-left px-3 py-2 rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium">Resumen</button>
+      <button data-pestana="integrantes" class="w-full text-left px-3 py-2 rounded-lg hover:bg-institucional-600/60 dark:hover:bg-institucional-800">Integrantes</button>
+      <button data-pestana="proyectos" class="w-full text-left px-3 py-2 rounded-lg hover:bg-institucional-600/60 dark:hover:bg-institucional-800">Proyectos</button>
+      <button data-pestana="actividades" class="w-full text-left px-3 py-2 rounded-lg hover:bg-institucional-600/60 dark:hover:bg-institucional-800">Actividades</button>
+      <button data-pestana="productos" class="w-full text-left px-3 py-2 rounded-lg hover:bg-institucional-600/60 dark:hover:bg-institucional-800">Productos académicos</button>
+    </nav>
+  </aside>
+
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="flex items-center justify-between gap-4 px-6 py-4 border-b border-institucional-100 dark:border-institucional-800">
+      <div>
+        <p class="text-sm text-institucional-500 dark:text-institucional-300">Docente líder</p>
+        <p id="nombre-usuario" class="font-medium"></p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="boton-tema" type="button"
+          class="flex items-center gap-2 rounded-full border border-institucional-200 dark:border-institucional-700 px-3 py-2 text-sm hover:border-dorado-500 dark:hover:border-dorado-400">
+          <span data-icono-tema>🌙</span>
+          <span data-texto-tema class="hidden sm:inline">Modo oscuro</span>
+        </button>
+        <button id="boton-salir" type="button" class="text-sm font-medium text-institucional-500 dark:text-institucional-300 hover:text-dorado-600 dark:hover:text-dorado-400">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <main class="flex-1 px-6 py-8 overflow-y-auto">
+
+      <!-- PANEL: Resumen -->
+      <section id="panel-resumen" data-panel>
+        <h1 class="font-display text-2xl mb-6">Resumen del semillero</h1>
+        <div class="grid grid-cols-3 gap-4 max-w-xl">
+          <div class="indicador pl-4 py-2" style="--acento-indicador:#2F5C8F">
+            <p class="text-2xl font-semibold" id="kpi-integrantes">—</p>
+            <p class="text-xs text-institucional-500 dark:text-institucional-300">Integrantes activos</p>
+          </div>
+          <div class="indicador pl-4 py-2" style="--acento-indicador:#2F855A">
+            <p class="text-2xl font-semibold" id="kpi-proyectos-activos">—</p>
+            <p class="text-xs text-institucional-500 dark:text-institucional-300">Proyectos activos/total</p>
+          </div>
+          <div class="indicador pl-4 py-2" style="--acento-indicador:#C9962B">
+            <p class="text-2xl font-semibold" id="kpi-productos-validados">—</p>
+            <p class="text-xs text-institucional-500 dark:text-institucional-300">Productos validados/total</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL: Integrantes y solicitudes -->
+      <section id="panel-integrantes" data-panel class="hidden">
+        <h1 class="font-display text-2xl mb-2">Solicitudes de ingreso</h1>
+        <p class="text-sm text-institucional-500 dark:text-institucional-300 mb-4">
+          <span id="contador-pendientes">0</span> solicitud(es) pendiente(s) de revisión.
+        </p>
+        <p id="aviso-solicitudes" class="hidden text-sm mb-3"></p>
+        <div class="overflow-x-auto rounded-xl border border-institucional-100 dark:border-institucional-800 mb-10">
+          <table class="tabla-datos w-full text-sm">
+            <thead class="bg-institucional-100/60 dark:bg-institucional-900 text-left text-xs text-institucional-500 dark:text-institucional-300">
+              <tr>
+                <th class="py-2.5 px-4 font-medium">Estudiante</th>
+                <th class="py-2.5 px-4 font-medium">Código</th>
+                <th class="py-2.5 px-4 font-medium">Solicitado el</th>
+                <th class="py-2.5 px-4 font-medium"></th>
+              </tr>
+            </thead>
+            <tbody id="tabla-solicitudes" class="px-4"></tbody>
+          </table>
+        </div>
+
+        <h2 class="font-display text-lg mb-3">Integrantes activos</h2>
+        <div class="overflow-x-auto rounded-xl border border-institucional-100 dark:border-institucional-800">
+          <table class="tabla-datos w-full text-sm">
+            <thead class="bg-institucional-100/60 dark:bg-institucional-900 text-left text-xs text-institucional-500 dark:text-institucional-300">
+              <tr>
+                <th class="py-2.5 px-4 font-medium">Nombre</th>
+                <th class="py-2.5 px-4 font-medium">Correo</th>
+                <th class="py-2.5 px-4 font-medium">Rol interno</th>
+                <th class="py-2.5 px-4 font-medium">Desde</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-integrantes" class="px-4"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PANEL: Proyectos -->
+      <section id="panel-proyectos" data-panel class="hidden">
+        <h1 class="font-display text-2xl mb-6">Proyectos de investigación</h1>
+        <div class="grid lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2 overflow-x-auto rounded-xl border border-institucional-100 dark:border-institucional-800 h-fit">
+            <table class="tabla-datos w-full text-sm">
+              <thead class="bg-institucional-100/60 dark:bg-institucional-900 text-left text-xs text-institucional-500 dark:text-institucional-300">
+                <tr>
+                  <th class="py-2.5 px-4 font-medium">Título</th>
+                  <th class="py-2.5 px-4 font-medium">Inicio</th>
+                  <th class="py-2.5 px-4 font-medium">Estado</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-proyectos" class="px-4"></tbody>
+            </table>
+          </div>
+          <form id="form-proyecto" class="panel rounded-xl border border-institucional-100 dark:border-institucional-800 p-5 h-fit space-y-4">
+            <h2 class="font-display text-lg">Nuevo proyecto</h2>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="proyecto-titulo">Título</label>
+              <input id="proyecto-titulo" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="proyecto-descripcion">Descripción</label>
+              <textarea id="proyecto-descripcion" rows="2" class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm"></textarea>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="proyecto-fecha-inicio">Fecha de inicio</label>
+              <input id="proyecto-fecha-inicio" type="date" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
+            </div>
+            <p data-aviso class="hidden text-sm"></p>
+            <button type="submit" class="w-full rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium py-2.5 text-sm hover:bg-institucional-600 dark:hover:bg-dorado-400">Crear proyecto</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- PANEL: Actividades -->
+      <section id="panel-actividades" data-panel class="hidden">
+        <h1 class="font-display text-2xl mb-6">Actividades</h1>
+        <div class="grid lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2 space-y-6">
+            <div class="overflow-x-auto rounded-xl border border-institucional-100 dark:border-institucional-800">
+              <table class="tabla-datos w-full text-sm">
+                <thead class="bg-institucional-100/60 dark:bg-institucional-900 text-left text-xs text-institucional-500 dark:text-institucional-300">
+                  <tr>
+                    <th class="py-2.5 px-4 font-medium">Título</th>
+                    <th class="py-2.5 px-4 font-medium">Tipo</th>
+                    <th class="py-2.5 px-4 font-medium">Fecha</th>
+                    <th class="py-2.5 px-4 font-medium"></th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-actividades" class="px-4"></tbody>
+              </table>
+            </div>
+
+            <form id="form-asistencia" class="hidden panel rounded-xl border border-institucional-100 dark:border-institucional-800 p-5 space-y-4">
+              <div class="flex items-center justify-between">
+                <h3 class="font-medium text-sm">Registrar asistencia</h3>
+                <button type="button" id="boton-cerrar-asistencia" class="text-xs text-institucional-400 hover:text-dorado-500">Cerrar</button>
+              </div>
+              <input type="hidden" id="id-actividad-asistencia">
+              <div>
+                <label class="block text-sm font-medium mb-1.5" for="select-usuario-asistencia">Integrante</label>
+                <select id="select-usuario-asistencia" class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm"></select>
+              </div>
+              <label class="flex items-center gap-2 text-sm">
+                <input type="checkbox" id="asistencia-asistio" class="rounded border-institucional-300"> Asistió
+              </label>
+              <div>
+                <label class="block text-sm font-medium mb-1.5" for="asistencia-observacion">Observación (opcional)</label>
+                <input id="asistencia-observacion" class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
+              </div>
+              <p data-aviso class="hidden text-sm"></p>
+              <button type="submit" class="w-full rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium py-2.5 text-sm hover:bg-institucional-600 dark:hover:bg-dorado-400">Guardar asistencia</button>
+            </form>
+          </div>
+
+          <form id="form-actividad" class="panel rounded-xl border border-institucional-100 dark:border-institucional-800 p-5 h-fit space-y-4">
+            <h2 class="font-display text-lg">Nueva actividad</h2>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="actividad-titulo">Título</label>
+              <input id="actividad-titulo" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="actividad-tipo">Tipo</label>
+              <select id="actividad-tipo" class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
+                <option value="reunion">Reunión</option>
+                <option value="taller">Taller</option>
+                <option value="capacitacion">Capacitación</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="actividad-fecha">Fecha y hora</label>
+              <input id="actividad-fecha" type="datetime-local" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="select-proyecto-actividad">Proyecto relacionado</label>
+              <select id="select-proyecto-actividad" class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm"></select>
+            </div>
+            <p data-aviso class="hidden text-sm"></p>
+            <button type="submit" class="w-full rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium py-2.5 text-sm hover:bg-institucional-600 dark:hover:bg-dorado-400">Crear actividad</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- PANEL: Productos académicos -->
+      <section id="panel-productos" data-panel class="hidden">
+        <h1 class="font-display text-2xl mb-6">Productos académicos</h1>
+        <div class="grid lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2 overflow-x-auto rounded-xl border border-institucional-100 dark:border-institucional-800 h-fit">
+            <table class="tabla-datos w-full text-sm">
+              <thead class="bg-institucional-100/60 dark:bg-institucional-900 text-left text-xs text-institucional-500 dark:text-institucional-300">
+                <tr>
+                  <th class="py-2.5 px-4 font-medium">Título</th>
+                  <th class="py-2.5 px-4 font-medium">Tipo</th>
+                  <th class="py-2.5 px-4 font-medium">Proyecto</th>
+                  <th class="py-2.5 px-4 font-medium"></th>
+                </tr>
+              </thead>
+              <tbody id="tabla-productos" class="px-4"></tbody>
+            </table>
+          </div>
+          <form id="form-producto" class="panel rounded-xl border border-institucional-100 dark:border-institucional-800 p-5 h-fit space-y-4">
+            <h2 class="font-display text-lg">Registrar producto</h2>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="select-proyecto-producto">Proyecto</label>
+              <select id="select-proyecto-producto" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm"></select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="producto-tipo">Tipo</label>
+              <select id="producto-tipo" class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
+                <option value="articulo">Artículo</option>
+                <option value="ponencia">Ponencia</option>
+                <option value="prototipo">Prototipo</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="producto-titulo">Título</label>
+              <input id="producto-titulo" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1.5" for="producto-descripcion">Descripción</label>
+              <textarea id="producto-descripcion" rows="2" class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm"></textarea>
+            </div>
+            <p data-aviso class="hidden text-sm"></p>
+            <button type="submit" class="w-full rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium py-2.5 text-sm hover:bg-institucional-600 dark:hover:bg-dorado-400">Registrar producto</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/lider.js"></script>
+</body>
+</html>

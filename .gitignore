@@ -1,0 +1,13 @@
+# Dependencias (se reinstalan con "npm install")
+node_modules/
+
+# Variables de entorno con datos sensibles (usar .env.example como plantilla)
+.env
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+*.log

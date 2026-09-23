@@ -1,0 +1,54 @@
+/* Estilos complementarios a las utilidades de Tailwind.
+   Se mantienen deliberadamente mínimos: la mayoría del diseño vive en las
+   clases utilitarias de cada HTML; aquí solo lo que Tailwind no resuelve bien. */
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: 'Spectral', Georgia, serif;
+}
+
+/* Transición suave al alternar entre modo claro/oscuro, sin animar todo lo demás */
+body, header, aside, .panel, table, input, select, textarea, button {
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+/* Barra de desplazamiento discreta, coherente en ambos modos */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background-color: rgba(120, 130, 145, 0.35);
+  border-radius: 999px;
+}
+
+/* Foco visible accesible, consistente con el acento dorado institucional */
+:focus-visible {
+  outline: 2px solid #C9962B;
+  outline-offset: 2px;
+}
+
+/* Filas de tabla con separación fina en vez de bordes pesados por celda */
+.tabla-datos tbody tr {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+}
+.tabla-datos tbody tr:hover {
+  background-color: rgba(47, 92, 143, 0.06);
+}
+.dark .tabla-datos tbody tr:hover {
+  background-color: rgba(231, 200, 120, 0.06);
+}
+
+/* Barra de acento vertical usada en los bloques de indicadores (KPI) */
+.indicador {
+  border-left: 3px solid var(--acento-indicador, #2F5C8F);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
