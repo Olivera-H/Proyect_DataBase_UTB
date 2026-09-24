@@ -65,7 +65,7 @@ body, header, aside, .panel, table, input, select, textarea, button {
       rgba(30, 58, 95, 0.74) 35%,
       rgba(30, 58, 95, 0.72) 60%,
       rgba(30, 58, 95, 0.90) 100%),
-    url('../img/fondo-login.jpg');
+    url('../fondo-login.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -78,6 +78,6 @@ body, header, aside, .panel, table, input, select, textarea, button {
       rgba(11, 22, 34, 0.82) 35%,
       rgba(11, 22, 34, 0.80) 60%,
       rgba(11, 22, 34, 0.94) 100%),
-    url('../img/fondo-login.jpg');
+    url('../fondo-login.jpg');
 }
 
