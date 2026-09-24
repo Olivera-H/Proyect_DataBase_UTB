@@ -52,3 +52,32 @@ body, header, aside, .panel, table, input, select, textarea, button {
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* Panel azul del login: foto del campus con un velo del azul institucional encima.
+   El velo mantiene legibles los textos claros sobre una foto luminosa y conserva la
+   identidad azul; en modo oscuro se usa el azul más profundo. La ruta de la imagen es
+   relativa a este archivo. Si la foto no carga, queda el color sólido de respaldo. */
+.panel-institucional {
+  background-color: #1E3A5F;
+  background-image:
+    linear-gradient(180deg,
+      rgba(30, 58, 95, 0.86) 0%,
+      rgba(30, 58, 95, 0.74) 35%,
+      rgba(30, 58, 95, 0.72) 60%,
+      rgba(30, 58, 95, 0.90) 100%),
+    url('../img/fondo-login.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.dark .panel-institucional {
+  background-color: #12233A;
+  background-image:
+    linear-gradient(180deg,
+      rgba(11, 22, 34, 0.90) 0%,
+      rgba(11, 22, 34, 0.82) 35%,
+      rgba(11, 22, 34, 0.80) 60%,
+      rgba(11, 22, 34, 0.94) 100%),
+    url('../img/fondo-login.jpg');
+}
+
