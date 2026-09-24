@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Semilleros UTB · Panel del Administrador</title>
+<title>Semilleros UTB · Iniciar sesión</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,22 @@
     theme: {
       extend: {
         colors: {
-          institucional: { 50:'#F5F8FB',100:'#E7EEF5',300:'#9DB9D4',500:'#2F5C8F',600:'#254A73',700:'#1E3A5F',800:'#17304F',900:'#12233A',950:'#0B1622' },
-          dorado: { 300:'#E7C878',400:'#D9A441',500:'#C9962B',600:'#A97A1E' }
+          institucional: {
+            50:  '#F5F8FB',
+            100: '#E7EEF5',
+            300: '#9DB9D4',
+            500: '#2F5C8F',
+            600: '#254A73',
+            700: '#1E3A5F',
+            900: '#12233A',
+            950: '#0B1622'
+          },
+          dorado: {
+            300: '#E7C878',
+            400: '#D9A441',
+            500: '#C9962B',
+            600: '#A97A1E'
+          }
         },
         fontFamily: {
           display: ['Spectral', 'Georgia', 'serif'],
@@ -28,235 +42,82 @@
   };
 </script>
 <link rel="stylesheet" href="assets/css/custom.css">
+<!-- theme.js se carga en el head para fijar el modo oscuro/claro antes de pintar la página -->
 <script src="assets/js/theme.js"></script>
 </head>
 <body class="min-h-screen bg-institucional-50 text-institucional-950 dark:bg-institucional-950 dark:text-institucional-50">
 
-<div class="flex min-h-screen">
-  <!-- Barra lateral -->
-  <aside class="hidden md:flex md:w-60 flex-col bg-institucional-700 dark:bg-institucional-900 text-institucional-50 px-5 py-6 shrink-0">
-    <div class="mb-10">
-      <p class="font-display text-xl">Semilleros UTB</p>
-      <p class="text-xs text-institucional-300 mt-0.5">Panel del Administrador</p>
-    </div>
-    <nav class="space-y-1.5 text-sm">
-      <button data-pestana="resumen" class="w-full text-left px-3 py-2 rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium">Resumen general</button>
-      <button data-pestana="semilleros" class="w-full text-left px-3 py-2 rounded-lg hover:bg-institucional-600/60 dark:hover:bg-institucional-800">Semilleros</button>
-      <button data-pestana="usuarios" class="w-full text-left px-3 py-2 rounded-lg hover:bg-institucional-600/60 dark:hover:bg-institucional-800">Usuarios</button>
-      <button data-pestana="academico" class="w-full text-left px-3 py-2 rounded-lg hover:bg-institucional-600/60 dark:hover:bg-institucional-800">Facultades y programas</button>
-    </nav>
-  </aside>
+  <button id="boton-tema" type="button"
+    class="fixed top-4 right-4 z-10 flex items-center gap-2 rounded-full border border-institucional-200 dark:border-institucional-700 bg-white/80 dark:bg-institucional-900/80 backdrop-blur px-3 py-2 text-sm shadow-sm hover:border-dorado-500 dark:hover:border-dorado-400">
+    <span data-icono-tema>🌙</span>
+    <span data-texto-tema class="hidden sm:inline">Modo oscuro</span>
+  </button>
 
-  <div class="flex-1 flex flex-col min-w-0">
-    <!-- Barra superior -->
-    <header class="flex items-center justify-between gap-4 px-6 py-4 border-b border-institucional-100 dark:border-institucional-800">
+  <main class="min-h-screen grid lg:grid-cols-2">
+    <!-- Panel institucional: foto del campus con velo azul (estilos en .panel-institucional, assets/css/custom.css) -->
+    <section class="panel-institucional hidden lg:flex flex-col justify-between text-institucional-50 px-12 py-14">
       <div>
-        <p class="text-sm text-institucional-500 dark:text-institucional-300">Bienvenido/a</p>
-        <p id="nombre-usuario" class="font-medium"></p>
+        <p class="font-display text-2xl tracking-tight">Semilleros UTB</p>
+        <p class="mt-1 text-institucional-200 text-sm">Universidad Tecnológica de Bolívar</p>
       </div>
-      <div class="flex items-center gap-3">
-        <button id="boton-tema" type="button"
-          class="flex items-center gap-2 rounded-full border border-institucional-200 dark:border-institucional-700 px-3 py-2 text-sm hover:border-dorado-500 dark:hover:border-dorado-400">
-          <span data-icono-tema>🌙</span>
-          <span data-texto-tema class="hidden sm:inline">Modo oscuro</span>
-        </button>
-        <button id="boton-salir" type="button" class="text-sm font-medium text-institucional-500 dark:text-institucional-300 hover:text-dorado-600 dark:hover:text-dorado-400">Cerrar sesión</button>
+      <div class="max-w-md">
+        <h1 class="font-display text-4xl leading-tight">
+          Un solo lugar para el trayecto investigativo de cada semillero.
+        </h1>
+        <p class="mt-5 text-institucional-200 leading-relaxed">
+          Integrantes, proyectos, actividades y productos académicos, organizados
+          por semillero y con el seguimiento que antes vivía disperso en archivos
+          sueltos.
+        </p>
       </div>
-    </header>
+      <p class="text-xs text-institucional-300">
+        Acceso restringido a administradores del sistema y docentes líderes de semillero.
+      </p>
+    </section>
 
-    <main class="flex-1 px-6 py-8 overflow-y-auto">
-
-      <!-- PANEL: Resumen general -->
-      <section id="panel-resumen" data-panel>
-        <h1 class="font-display text-2xl mb-6">Resumen general de la UTB</h1>
-
-        <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
-          <div class="indicador pl-4 py-2" style="--acento-indicador:#2F5C8F">
-            <p class="text-2xl font-semibold" id="kpi-semilleros">—</p>
-            <p class="text-xs text-institucional-500 dark:text-institucional-300">Semilleros activos</p>
-          </div>
-          <div class="indicador pl-4 py-2" style="--acento-indicador:#C9962B">
-            <p class="text-2xl font-semibold" id="kpi-usuarios">—</p>
-            <p class="text-xs text-institucional-500 dark:text-institucional-300">Usuarios activos</p>
-          </div>
-          <div class="indicador pl-4 py-2" style="--acento-indicador:#B4232C">
-            <p class="text-2xl font-semibold" id="kpi-pendientes">—</p>
-            <p class="text-xs text-institucional-500 dark:text-institucional-300">Solicitudes pendientes</p>
-          </div>
-          <div class="indicador pl-4 py-2" style="--acento-indicador:#2F855A">
-            <p class="text-2xl font-semibold" id="kpi-proyectos">—</p>
-            <p class="text-xs text-institucional-500 dark:text-institucional-300">Proyectos en curso</p>
-          </div>
-          <div class="indicador pl-4 py-2" style="--acento-indicador:#9DB9D4">
-            <p class="text-2xl font-semibold" id="kpi-productos">—</p>
-            <p class="text-xs text-institucional-500 dark:text-institucional-300">Productos validados</p>
-          </div>
+    <!-- Formulario de acceso -->
+    <section class="flex items-center justify-center px-6 py-16">
+      <div class="w-full max-w-sm">
+        <div class="lg:hidden mb-8">
+          <p class="font-display text-xl">Semilleros UTB</p>
+          <p class="text-sm text-institucional-500 dark:text-institucional-300">Universidad Tecnológica de Bolívar</p>
         </div>
 
-        <h2 class="font-display text-lg mb-3">Semilleros de la universidad</h2>
-        <div class="overflow-x-auto rounded-xl border border-institucional-100 dark:border-institucional-800">
-          <table class="tabla-datos w-full text-sm">
-            <thead class="bg-institucional-100/60 dark:bg-institucional-900 text-left text-xs uppercase-none text-institucional-500 dark:text-institucional-300">
-              <tr>
-                <th class="py-2.5 px-4 font-medium">Semillero</th>
-                <th class="py-2.5 px-4 font-medium">Facultad</th>
-                <th class="py-2.5 px-4 font-medium">Docente líder</th>
-                <th class="py-2.5 px-4 font-medium text-center">Integrantes</th>
-                <th class="py-2.5 px-4 font-medium text-center">Proyectos (activos/total)</th>
-                <th class="py-2.5 px-4 font-medium text-center">Productos (validados/total)</th>
-                <th class="py-2.5 px-4 font-medium">Estado</th>
-              </tr>
-            </thead>
-            <tbody id="tabla-resumen-semilleros" class="px-4"></tbody>
-          </table>
-        </div>
-      </section>
+        <h2 class="font-display text-2xl mb-1">Iniciar sesión</h2>
+        <p class="text-sm text-institucional-500 dark:text-institucional-300 mb-8">
+          Ingresa con tu correo institucional.
+        </p>
 
-      <!-- PANEL: Semilleros -->
-      <section id="panel-semilleros" data-panel class="hidden">
-        <h1 class="font-display text-2xl mb-6">Semilleros</h1>
-
-        <div class="grid lg:grid-cols-3 gap-8">
-          <div class="lg:col-span-2 overflow-x-auto rounded-xl border border-institucional-100 dark:border-institucional-800 h-fit">
-            <table class="tabla-datos w-full text-sm">
-              <thead class="bg-institucional-100/60 dark:bg-institucional-900 text-left text-xs text-institucional-500 dark:text-institucional-300">
-                <tr>
-                  <th class="py-2.5 px-4 font-medium">Nombre</th>
-                  <th class="py-2.5 px-4 font-medium">Facultad</th>
-                  <th class="py-2.5 px-4 font-medium">Docente líder</th>
-                  <th class="py-2.5 px-4 font-medium text-center">Integrantes</th>
-                  <th class="py-2.5 px-4 font-medium">Estado</th>
-                </tr>
-              </thead>
-              <tbody id="tabla-semilleros" class="px-4"></tbody>
-            </table>
-          </div>
-
-          <form id="form-semillero" class="panel rounded-xl border border-institucional-100 dark:border-institucional-800 p-5 h-fit space-y-4">
-            <h2 class="font-display text-lg">Crear semillero</h2>
-            <div>
-              <label class="block text-sm font-medium mb-1.5" for="semillero-nombre">Nombre</label>
-              <input id="semillero-nombre" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1.5" for="semillero-descripcion">Descripción</label>
-              <textarea id="semillero-descripcion" rows="2" class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm"></textarea>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1.5" for="select-facultad-semillero">Facultad</label>
-              <select id="select-facultad-semillero" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm"></select>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1.5" for="select-lider-semillero">Docente líder</label>
-              <select id="select-lider-semillero" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm"></select>
-            </div>
-            <p data-aviso class="hidden text-sm"></p>
-            <button type="submit" class="w-full rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium py-2.5 text-sm hover:bg-institucional-600 dark:hover:bg-dorado-400">Crear semillero</button>
-          </form>
-        </div>
-      </section>
-
-      <!-- PANEL: Usuarios -->
-      <section id="panel-usuarios" data-panel class="hidden">
-        <h1 class="font-display text-2xl mb-6">Usuarios</h1>
-
-        <div class="grid lg:grid-cols-3 gap-8">
-          <div class="lg:col-span-2 overflow-x-auto rounded-xl border border-institucional-100 dark:border-institucional-800 h-fit">
-            <table class="tabla-datos w-full text-sm">
-              <thead class="bg-institucional-100/60 dark:bg-institucional-900 text-left text-xs text-institucional-500 dark:text-institucional-300">
-                <tr>
-                  <th class="py-2.5 px-4 font-medium">Nombre</th>
-                  <th class="py-2.5 px-4 font-medium">Correo</th>
-                  <th class="py-2.5 px-4 font-medium">Rol</th>
-                  <th class="py-2.5 px-4 font-medium">Programa</th>
-                  <th class="py-2.5 px-4 font-medium">Estado</th>
-                  <th class="py-2.5 px-4 font-medium"></th>
-                </tr>
-              </thead>
-              <tbody id="tabla-usuarios" class="px-4"></tbody>
-            </table>
-          </div>
-
-          <form id="form-usuario" class="panel rounded-xl border border-institucional-100 dark:border-institucional-800 p-5 h-fit space-y-4">
-            <h2 class="font-display text-lg">Crear usuario</h2>
-            <div class="grid grid-cols-2 gap-3">
-              <div>
-                <label class="block text-sm font-medium mb-1.5" for="usuario-nombre">Nombre</label>
-                <input id="usuario-nombre" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-              </div>
-              <div>
-                <label class="block text-sm font-medium mb-1.5" for="usuario-apellido">Apellido</label>
-                <input id="usuario-apellido" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1.5" for="usuario-email">Correo institucional</label>
-              <input id="usuario-email" type="email" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1.5" for="usuario-password">Contraseña temporal</label>
-              <input id="usuario-password" type="password" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1.5" for="usuario-codigo">Código institucional (opcional)</label>
-              <input id="usuario-codigo" class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1.5" for="usuario-rol">Rol</label>
-              <select id="usuario-rol" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-                <option value="Estudiante">Estudiante</option>
-                <option value="Profesor_Lider">Profesor Líder</option>
-                <option value="Admin_Sistema">Administrador de Sistema</option>
-              </select>
-            </div>
-            <p data-aviso class="hidden text-sm"></p>
-            <button type="submit" class="w-full rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium py-2.5 text-sm hover:bg-institucional-600 dark:hover:bg-dorado-400">Crear usuario</button>
-          </form>
-        </div>
-      </section>
-
-      <!-- PANEL: Facultades y programas -->
-      <section id="panel-academico" data-panel class="hidden">
-        <h1 class="font-display text-2xl mb-6">Facultades y programas</h1>
-
-        <div class="grid lg:grid-cols-2 gap-8">
+        <form id="form-login" class="space-y-5" novalidate>
           <div>
-            <h2 class="font-display text-lg mb-3">Facultades</h2>
-            <div class="overflow-x-auto rounded-xl border border-institucional-100 dark:border-institucional-800 mb-5">
-              <table class="tabla-datos w-full text-sm">
-                <thead class="bg-institucional-100/60 dark:bg-institucional-900 text-left text-xs text-institucional-500 dark:text-institucional-300">
-                  <tr><th class="py-2.5 px-4 font-medium">Nombre</th><th class="py-2.5 px-4 font-medium">Código</th></tr>
-                </thead>
-                <tbody id="tabla-facultades" class="px-4"></tbody>
-              </table>
-            </div>
-            <form id="form-facultad" class="panel rounded-xl border border-institucional-100 dark:border-institucional-800 p-5 space-y-4">
-              <h3 class="font-medium text-sm">Nueva facultad</h3>
-              <input id="facultad-nombre" placeholder="Nombre" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-              <input id="facultad-codigo" placeholder="Código (ej. ING)" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-              <p data-aviso class="hidden text-sm"></p>
-              <button type="submit" class="w-full rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium py-2.5 text-sm hover:bg-institucional-600 dark:hover:bg-dorado-400">Crear facultad</button>
-            </form>
+            <label for="email" class="block text-sm font-medium mb-1.5">Correo institucional</label>
+            <input id="email" name="email" type="email" required autocomplete="email"
+              placeholder="nombre.apellido@utb.edu.co"
+              class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3.5 py-2.5 text-sm placeholder:text-institucional-300 dark:placeholder:text-institucional-500 focus:border-institucional-500 dark:focus:border-dorado-400">
           </div>
-
           <div>
-            <h2 class="font-display text-lg mb-3">Nuevo programa académico</h2>
-            <form id="form-programa" class="panel rounded-xl border border-institucional-100 dark:border-institucional-800 p-5 space-y-4">
-              <input id="programa-nombre" placeholder="Nombre del programa" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-              <input id="programa-codigo" placeholder="Código (ej. IS)" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm">
-              <select id="select-facultad-programa" required class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3 py-2 text-sm"></select>
-              <p data-aviso class="hidden text-sm"></p>
-              <button type="submit" class="w-full rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium py-2.5 text-sm hover:bg-institucional-600 dark:hover:bg-dorado-400">Crear programa</button>
-            </form>
+            <label for="password" class="block text-sm font-medium mb-1.5">Contraseña</label>
+            <input id="password" name="password" type="password" required autocomplete="current-password"
+              class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3.5 py-2.5 text-sm focus:border-institucional-500 dark:focus:border-dorado-400">
           </div>
-        </div>
-      </section>
 
-    </main>
-  </div>
-</div>
+          <p id="aviso-login" class="hidden text-sm"></p>
 
-<script src="assets/js/api.js"></script>
-<script src="assets/js/admin.js"></script>
+          <button id="boton-ingresar" type="submit"
+            class="w-full rounded-lg bg-institucional-700 dark:bg-dorado-500 text-white dark:text-institucional-950 font-medium py-2.5 text-sm hover:bg-institucional-600 dark:hover:bg-dorado-400 disabled:opacity-60">
+            Ingresar
+          </button>
+        </form>
+
+        <p class="mt-8 text-xs text-institucional-400 dark:text-institucional-500">
+          Datos de prueba (script SQL de ejemplo): admin.sistema@utb.edu.co /
+          carlos.martinez@utb.edu.co · contraseña <span class="font-medium">Utb2026*</span>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/login.js"></script>
 </body>
 </html>
