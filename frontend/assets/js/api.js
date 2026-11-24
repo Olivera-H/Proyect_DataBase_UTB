@@ -1,7 +1,9 @@
 // Cliente HTTP mínimo para hablar con la API del backend.
 // Ajusta API_BASE si tu backend corre en otro host/puerto.
-const API_BASE = 'http://localhost:4000/api';
-
+const API_BASE = window.location.hostname.endsWith('.app.github.dev') 
+  ? window.location.origin.replace(/-\d+\.app\.github\.dev$/, '-4000.app.github.dev') + '/api' 
+  : 'http://localhost:4000/api';
+  
 const Sesion = {
   guardar(token, usuario) {
     localStorage.setItem('semilleros_token', token);

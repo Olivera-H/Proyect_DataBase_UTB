@@ -58,8 +58,8 @@ semilleros-utb/
 
 | Rol                  | Correo                          |
 |-----------------------|----------------------------------|
-| Administrador de Sistema | admin.sistema@utb.edu.co     |
-| Profesor Líder (Semillero IA)        | carlos.martinez@utb.edu.co |
+| Administrador de Sistema | rolivera@utb.edu.co    |
+| Profesor Líder (Semillero IA)        | cbenitez@utb.edu.co |
 | Profesor Líder (Semillero Biotecnología) | ana.perez@utb.edu.co   |
 | Estudiante            | juan.gomez@utb.edu.co           |
 

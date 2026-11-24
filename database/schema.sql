@@ -232,8 +232,8 @@ INSERT INTO programa (nombre, codigo, id_facultad) VALUES
 -- Hash generado con bcrypt (10 rounds). Debe cambiarse en un entorno real.
 -- $2a$10$KQS0b8VJ7pMLHP9ATKTsvuzFo/LKo7x0O1V0vY0a1mTjPLVMzXRwW
 INSERT INTO usuario (nombre, apellido, email, password_hash, codigo_institucional, id_rol, id_programa, activo) VALUES
-    ('Laura', 'Restrepo', 'admin.sistema@utb.edu.co', '$2a$10$KQS0b8VJ7pMLHP9ATKTsvuzFo/LKo7x0O1V0vY0a1mTjPLVMzXRwW', NULL, 1, NULL, TRUE),
-    ('Carlos', 'Martínez', 'carlos.martinez@utb.edu.co', '$2a$10$KQS0b8VJ7pMLHP9ATKTsvuzFo/LKo7x0O1V0vY0a1mTjPLVMzXRwW', 'DOC-001', 2, 1, TRUE),
+    ('Ramiro', 'Olivera', 'rolivera@utb.edu.co', '$2a$10$KQS0b8VJ7pMLHP9ATKTsvuzFo/LKo7x0O1V0vY0a1mTjPLVMzXRwW', NULL, 1, NULL, TRUE),
+    ('Chistian, 'Benitez', 'cbenitez@utb.edu.co', '$2a$10$KQS0b8VJ7pMLHP9ATKTsvuzFo/LKo7x0O1V0vY0a1mTjPLVMzXRwW', 'DOC-001', 2, 1, TRUE),
     ('Ana', 'Pérez', 'ana.perez@utb.edu.co', '$2a$10$KQS0b8VJ7pMLHP9ATKTsvuzFo/LKo7x0O1V0vY0a1mTjPLVMzXRwW', 'DOC-002', 2, 6, TRUE),
     ('Juan', 'Gómez', 'juan.gomez@utb.edu.co', '$2a$10$KQS0b8VJ7pMLHP9ATKTsvuzFo/LKo7x0O1V0vY0a1mTjPLVMzXRwW', 'EST-1001', 3, 1, TRUE),
     ('María', 'López', 'maria.lopez@utb.edu.co', '$2a$10$KQS0b8VJ7pMLHP9ATKTsvuzFo/LKo7x0O1V0vY0a1mTjPLVMzXRwW', 'EST-1002', 3, 1, TRUE),

@@ -54,8 +54,8 @@
   </button>
 
   <main class="min-h-screen grid lg:grid-cols-2">
-    <!-- Panel institucional -->
-    <section class="hidden lg:flex flex-col justify-between bg-institucional-700 dark:bg-institucional-900 text-institucional-50 px-12 py-14">
+    <!-- Panel institucional: foto del campus con velo azul (estilos en .panel-institucional, assets/css/custom.css) -->
+    <section class="panel-institucional hidden lg:flex flex-col justify-between text-institucional-50 px-12 py-14">
       <div>
         <p class="font-display text-2xl tracking-tight">Semilleros UTB</p>
         <p class="mt-1 text-institucional-200 text-sm">Universidad Tecnológica de Bolívar</p>
@@ -83,20 +83,20 @@
           <p class="text-sm text-institucional-500 dark:text-institucional-300">Universidad Tecnológica de Bolívar</p>
         </div>
 
-        <h2 class="font-display text-2xl mb-1">Iniciar sesión</h2>
+        <h2 class="font-display text-2xl mb-1">Iniciar sesión - Sing in</h2>
         <p class="text-sm text-institucional-500 dark:text-institucional-300 mb-8">
           Ingresa con tu correo institucional.
         </p>
 
         <form id="form-login" class="space-y-5" novalidate>
           <div>
-            <label for="email" class="block text-sm font-medium mb-1.5">Correo institucional</label>
+            <label for="email" class="block text-sm font-medium mb-1.5">Correo institucional - Email</label>
             <input id="email" name="email" type="email" required autocomplete="email"
               placeholder="nombre.apellido@utb.edu.co"
               class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3.5 py-2.5 text-sm placeholder:text-institucional-300 dark:placeholder:text-institucional-500 focus:border-institucional-500 dark:focus:border-dorado-400">
           </div>
           <div>
-            <label for="password" class="block text-sm font-medium mb-1.5">Contraseña</label>
+            <label for="password" class="block text-sm font-medium mb-1.5">Contraseña - Password</label>
             <input id="password" name="password" type="password" required autocomplete="current-password"
               class="w-full rounded-lg border border-institucional-200 dark:border-institucional-700 bg-white dark:bg-institucional-900 px-3.5 py-2.5 text-sm focus:border-institucional-500 dark:focus:border-dorado-400">
           </div>
@@ -121,3 +121,4 @@
   <script src="assets/js/login.js"></script>
 </body>
 </html>
+
